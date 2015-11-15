@@ -2,7 +2,9 @@
 
 Forked from FObermaier/DotSpatial.Plugins
 
-Personal copy to test BrutileLayer with DotSpatial 1.8 release and Dutch PDOK tile service
+Personal copy to update BrutileLayer to DotSpatial 1.8 release and Dutch PDOK tile service
+
+Observation: BrutileLayer works just fine with DotSpatial release version 1.8 !
 
 ## Current plugins
 
