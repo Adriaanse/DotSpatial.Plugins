@@ -1,6 +1,8 @@
 # DotSpatial.Plugins
 
-A set of plugins/application-extensions for DotSpatial
+Forked from FObermaier/DotSpatial.Plugins
+
+Personal copy to test BrutileLayer with DotSpatial 1,8 release and Dutch PDOK tile TMW/WTMS services
 
 ## Current plugins
 
