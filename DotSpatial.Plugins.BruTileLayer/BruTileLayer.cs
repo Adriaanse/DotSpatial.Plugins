@@ -252,12 +252,14 @@ namespace DotSpatial.Plugins.BruTileLayer
             var i = e.TileInfo.Index;
             if (i.Level != _level) return;
             
-            //System.Diagnostics.Debug.WriteLine("Tile received (Index({0}, {1}, {2}))", i.Level, i.Row, i.Col);
-// some timed refreshes if the server becomes slooow...
+#if DEBUG
+            Debug.WriteLine("Tile received (Index({0}, {1}, {2}))", i.Level, i.Row, i.Col);
+#endif
+            // some timed refreshes if the server becomes slooow...
             if (_stopwatch.Elapsed.Seconds > 1 && ! _tileFetcher.Ready())
             {
                 _stopwatch.Reset();
-                Invalidate();
+                MapFrame.Invalidate();
                 _stopwatch.Restart();
                 return;
             }
@@ -265,14 +267,14 @@ namespace DotSpatial.Plugins.BruTileLayer
             var ext = ToBrutileExtent(MapFrame.ViewExtents);
             if (ext.Intersects(e.TileInfo.Extent))
             {
-                Invalidate(FromBruTileExtent(e.TileInfo.Extent));
+                MapFrame.Invalidate(FromBruTileExtent(e.TileInfo.Extent));
             }
         }
 
         private void HandleQueueEmpty(object sender, EventArgs empty)
         {
             _stopwatch.Reset();
-            Invalidate();
+            MapFrame.Invalidate();
         }
 
         protected override void OnShowProperties(HandledEventArgs e)
@@ -468,7 +470,7 @@ namespace DotSpatial.Plugins.BruTileLayer
             Projection = _targetProjection ?? _projectionInfo;
 
             //Is this necessary?
-            //Invalidate(Extent);
+            //MapFrame.Invalidate(Extent);
         }
 
         /// <summary>
@@ -487,7 +489,7 @@ namespace DotSpatial.Plugins.BruTileLayer
                     _imageAttributes.SetColorMatrix(ca, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
                     OnItemChanged(EventArgs.Empty);
                     if (MapFrame != null)
-                        Invalidate(MapFrame.ViewExtents);
+                        MapFrame.Invalidate();
                 }
             }
         }
@@ -612,12 +614,13 @@ namespace DotSpatial.Plugins.BruTileLayer
 
                 sw.Stop();
                 
-                System.Diagnostics.Debug.WriteLine("{0} ms", sw.ElapsedMilliseconds);
-                System.Diagnostics.Debug.Write(string.Format("Trying to render #{0} tiles: ", tiles.Count));
-
+#if DEBUG                
+                Debug.WriteLine("{0} ms", sw.ElapsedMilliseconds);
+                Debug.Write(string.Format("Trying to render #{0} tiles: ", tiles.Count));
+#endif            
                 LogManager.DefaultLogManager.LogMessage(string.Format("{0} ms", sw.ElapsedMilliseconds), DialogResult.OK);
                 //if (InvalidRegion != null)
-                //    Invalidate();
+                //    MapFrame.Invalidate();
 
                 //_stopwatch.Restart();
                 Monitor.Exit(_drawLock);
