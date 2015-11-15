@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using DotSpatial.Controls;
 using DotSpatial.Controls.Header;
 using DotSpatial.Data;
 using DotSpatial.Data.Forms;
+using DotSpatial.Plugins.BruTileLayer;
+using DotSpatial.Plugins.BruTileLayer.Configuration;
 using DotSpatial.Projections;
 using DotSpatial.Projections.AuthorityCodes;
 
@@ -47,17 +50,32 @@ namespace TestApp
             finally
             {
                 map.FunctionMode = FunctionMode.Pan;
+
+                // no need for the reprojection feature, testing dutch PDOK services using only DutchRD
                 _infos = new ProjectionInfo[]
                 {
-                    KnownCoordinateSystems.Projected.World.WebMercator,
-                    KnownCoordinateSystems.Projected.Europe.EuropeLambertConformalConic,
-                    KnownCoordinateSystems.Projected.World.Sinusoidalworld,
-                    KnownCoordinateSystems.Projected.World.Polyconicworld,
-                    ProjectionInfo.FromEpsgCode(28992)
+                    KnownCoordinateSystems.Projected.NationalGrids.DutchRD
                 };
                 map.Projection = _infos[0];
                 map.MouseClick += map_MouseClick;
             }
+        }
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            // testing PDOK BRT achtergrond TMS (opening this via the Brutile add layer dialog does not work as it uses obsolete url)
+            var url = @"http://geodata.nationaalgeoregister.nl/tms/1.0.0/brtachtergrondkaart@EPSG:28992@png8";
+            var cache = Path.Combine(Path.GetTempPath(), "Nationaal Georegister (GeoData)", "brtachtergrondkaart");
+            var webLayerConfig = new TmsLayerConfiguration(cache, "PDOK Achtergrondkaart", url, false, false);
+            var layer = new BruTileLayer(webLayerConfig)
+            {
+                LegendItemVisible = true
+            };
+
+            map.Layers.Add(layer);
+            map.Projection = layer.Projection;
+            map.ViewExtents = layer.Extent;
+            map.Refresh();
+
         }
 
         void map_MouseClick(object sender, MouseEventArgs e)
@@ -233,5 +251,6 @@ private static Extent ToExtent(double[] xyOrdinates)
         {
             ((ConsoleControl.ConsoleControl)sender).InternalRichTextBox.ScrollToCaret();
         }
+
     }
 }

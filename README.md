@@ -2,7 +2,7 @@
 
 Forked from FObermaier/DotSpatial.Plugins
 
-Personal copy to test BrutileLayer with DotSpatial 1,8 release and Dutch PDOK tile TMW/WTMS services
+Personal copy to test BrutileLayer with DotSpatial 1.8 release and Dutch PDOK tile service
 
 ## Current plugins
 
