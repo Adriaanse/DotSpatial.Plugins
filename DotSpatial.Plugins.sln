@@ -21,21 +21,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotSpatial.CodeSamples", "D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotSpatial.Plugins.BruTileLayer.Tests", "DotSpatial.Plugins.BruTileLayer.Tests\DotSpatial.Plugins.BruTileLayer.Tests.csproj", "{C1078054-5A38-4256-9F64-6A708176E71A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotSpatial", "DotSpatial", "{579B503C-2E25-4C3C-921E-39488CBD77C9}"
-	ProjectSection(SolutionItems) = preProject
-		DotSpatial\DotSpatial.Controls.dll = DotSpatial\DotSpatial.Controls.dll
-		DotSpatial\DotSpatial.Data.dll = DotSpatial\DotSpatial.Data.dll
-		DotSpatial\DotSpatial.Data.Forms.dll = DotSpatial\DotSpatial.Data.Forms.dll
-		DotSpatial\DotSpatial.Extensions.dll = DotSpatial\DotSpatial.Extensions.dll
-		DotSpatial\DotSpatial.Modeling.Forms.dll = DotSpatial\DotSpatial.Modeling.Forms.dll
-		DotSpatial\DotSpatial.Mono.dll = DotSpatial\DotSpatial.Mono.dll
-		DotSpatial\DotSpatial.Projections.dll = DotSpatial\DotSpatial.Projections.dll
-		DotSpatial\DotSpatial.Serialization.dll = DotSpatial\DotSpatial.Serialization.dll
-		DotSpatial\DotSpatial.Symbology.dll = DotSpatial\DotSpatial.Symbology.dll
-		DotSpatial\DotSpatial.Symbology.Forms.dll = DotSpatial\DotSpatial.Symbology.Forms.dll
-		DotSpatial\DotSpatial.Topology.dll = DotSpatial\DotSpatial.Topology.dll
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
